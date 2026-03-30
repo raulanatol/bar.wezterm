@@ -13,8 +13,11 @@ local M = {}
 
 ---@class option.tabs
 ---@field active_tab_fg number
+---@field active_tab_bg string
 ---@field inactive_tab_fg number
+---@field inactive_tab_bg string
 ---@field new_tab_fg number
+---@field new_tab_bg string
 
 ---@class option.module
 ---@field enabled boolean
@@ -72,8 +75,11 @@ M.options = {
   modules = {
     tabs = {
       active_tab_fg = 4,
+      active_tab_bg = "transparent",
       inactive_tab_fg = 6,
+      inactive_tab_bg = "transparent",
       new_tab_fg = 2,
+      new_tab_bg = "transparent",
     },
     workspace = {
       enabled = true,

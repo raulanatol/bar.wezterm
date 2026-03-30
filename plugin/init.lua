@@ -7,20 +7,32 @@ local options = {}
 ---builds tab_bar colors block from a resolved color scheme
 ---@param scheme table
 ---@return table
+---resolves a bg option: if it looks like a color string use it directly,
+---if it is a number use it as an ansi index into the scheme
+---@param value string|number
+---@param scheme table
+---@return string
+local function resolve_bg(value, scheme)
+  if type(value) == "number" then
+    return scheme.ansi[value] or "transparent"
+  end
+  return value or "transparent"
+end
+
 local function build_tab_bar_colors(scheme)
   return {
     tab_bar = {
       background = "transparent",
       active_tab = {
-        bg_color = "transparent",
+        bg_color = resolve_bg(options.modules.tabs.active_tab_bg, scheme),
         fg_color = scheme.ansi[options.modules.tabs.active_tab_fg],
       },
       inactive_tab = {
-        bg_color = "transparent",
+        bg_color = resolve_bg(options.modules.tabs.inactive_tab_bg, scheme),
         fg_color = scheme.ansi[options.modules.tabs.inactive_tab_fg],
       },
       new_tab = {
-        bg_color = "transparent",
+        bg_color = resolve_bg(options.modules.tabs.new_tab_bg, scheme),
         fg_color = scheme.ansi[options.modules.tabs.new_tab_fg],
       },
     },
