@@ -70,7 +70,7 @@ M.get_cwd = function(pane, search_git_root_instead)
     end
   end
 
-  return cwd
+  return utilities._basename(cwd)
 end
 
 return M
