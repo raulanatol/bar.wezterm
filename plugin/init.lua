@@ -12,11 +12,11 @@ local options = {}
 ---@param value string|number
 ---@param scheme table
 ---@return string
-local function resolve_bg(value, scheme)
+local function resolve_color(value, scheme, fallback)
   if type(value) == "number" then
-    return scheme.ansi[value] or "transparent"
+    return scheme.ansi[value] or fallback or "transparent"
   end
-  return value or "transparent"
+  return value or fallback or "transparent"
 end
 
 local function build_tab_bar_colors(scheme)
@@ -24,16 +24,16 @@ local function build_tab_bar_colors(scheme)
     tab_bar = {
       background = "transparent",
       active_tab = {
-        bg_color = resolve_bg(options.modules.tabs.active_tab_bg, scheme),
-        fg_color = scheme.ansi[options.modules.tabs.active_tab_fg],
+        bg_color = resolve_color(options.modules.tabs.active_tab_bg, scheme, "transparent"),
+        fg_color = resolve_color(options.modules.tabs.active_tab_fg, scheme, "white"),
       },
       inactive_tab = {
-        bg_color = resolve_bg(options.modules.tabs.inactive_tab_bg, scheme),
-        fg_color = scheme.ansi[options.modules.tabs.inactive_tab_fg],
+        bg_color = resolve_color(options.modules.tabs.inactive_tab_bg, scheme, "transparent"),
+        fg_color = resolve_color(options.modules.tabs.inactive_tab_fg, scheme, "white"),
       },
       new_tab = {
-        bg_color = resolve_bg(options.modules.tabs.new_tab_bg, scheme),
-        fg_color = scheme.ansi[options.modules.tabs.new_tab_fg],
+        bg_color = resolve_color(options.modules.tabs.new_tab_bg, scheme, "transparent"),
+        fg_color = resolve_color(options.modules.tabs.new_tab_fg, scheme, "white"),
       },
     },
   }
